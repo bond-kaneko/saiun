@@ -6,6 +6,7 @@
 /tmp/*
 /vendor/*
 !/vendor/laravel/
+/config/Migrations/schma-dump-default.lock
 
 # OS generated files #
 ######################

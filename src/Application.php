@@ -197,7 +197,7 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
             ],
         ]);
 
-        $authenticationService->loadAuthenticator('Authentication.Session');
+        $authenticationService->loadAuthenticator('Authentication.Session', ['sessionKey' => 'UserAuth']);
         $authenticationService->loadAuthenticator('Authentication.Form', [
             'fields' => [
                 'username' => 'email',
