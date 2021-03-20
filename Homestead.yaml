@@ -6,25 +6,20 @@ authorize: ~/.ssh/id_rsa.pub
 keys:
     - ~/.ssh/id_rsa
 folders:
-    -
-        map: /Users/kanekojunki/Codes/lifes/saiun
-        to: /home/vagrant/code
+    - map: ./
+      to: /home/vagrant/code
+      type: "nfs"
 sites:
-    -
-        map: homestead.test
-        to: /home/vagrant/code/public
+    - map: homestead.test
+      to: /home/vagrant/code/webroot
 databases:
     - homestead
+    - test_homestead
 features:
-    -
-        mysql: true
-    -
-        mariadb: false
-    -
-        postgresql: false
-    -
-        ohmyzsh: false
-    -
-        webdriver: false
+    - mysql: true
+    - mariadb: false
+    - postgresql: false
+    - ohmyzsh: false
+    - webdriver: false
 name: saiun
 hostname: saiun
