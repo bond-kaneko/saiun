@@ -1,29 +1,26 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\Portfolio $portfolio
- */
-?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('List Portfolios'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
-    <div class="column-responsive column-80">
-        <div class="portfolios form content">
-            <?= $this->Form->create($portfolio) ?>
-            <fieldset>
-                <legend><?= __('Add Portfolio') ?></legend>
-                <?php
-                    echo $this->Form->control('user_id', ['options' => $users]);
-                    echo $this->Form->control('title');
-                    echo $this->Form->control('content');
-                ?>
-            </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
-            <?= $this->Form->end() ?>
-        </div>
-    </div>
+<style>
+.container {
+    max-width: 90%;
+}
+
+#block-editor #editor {
+    width: 100%;
+    display: flex;
+}
+#block-editor #editor .form-area {
+    width: 45%;
+    margin-right: auto;
+    margin-left: auto;
+}
+#block-editor #editor .block-area {
+    width: 45%;
+    margin-right: auto;
+    margin-left: auto;
+}
+</style>
+
+<div id="block-editor">
+    <block-editor></block-editor>
 </div>
+
+<?= $this->Html->script('block_editor', ['type' => 'module']); ?>

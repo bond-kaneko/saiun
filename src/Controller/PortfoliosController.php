@@ -55,8 +55,15 @@ class PortfoliosController extends AppController
      */
     public function add()
     {
-        $portfolio = $this->Portfolios->newEmptyEntity();
+        $loginUserId = $this->Authentication->getIdentity()['id'];
+        if (!$this->Portfolios->Users->exists(['id' => $loginUserId])) {
+            throw new NotFoundException();
+        }
+
+        $portfolio = $this->Portfolios->newEntity(['user_id' => $loginUserId]);
         if ($this->request->is('post')) {
+            debug($this->request->getData());
+            exit;
             $portfolio = $this->Portfolios->patchEntity($portfolio, $this->request->getData());
             if ($this->Portfolios->save($portfolio)) {
                 $this->Flash->success(__('The portfolio has been saved.'));
