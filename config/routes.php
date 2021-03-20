@@ -17,12 +17,15 @@
  * Redistributions of files must retain the above copyright notice.
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
+ *
+ * @see          https://cakephp.org CakePHP(tm) Project
+ *
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
 
 use Cake\Routing\Route\DashedRoute;
 use Cake\Routing\RouteBuilder;
+use Cake\Routing\Router;
 
 /*
  * The default class to use for all routes
@@ -41,7 +44,7 @@ use Cake\Routing\RouteBuilder;
  * inconsistently cased URLs when used with `:plugin`, `:controller` and
  * `:action` markers.
  */
-/** @var \Cake\Routing\RouteBuilder $routes */
+/* @var \Cake\Routing\RouteBuilder $routes */
 $routes->setRouteClass(DashedRoute::class);
 
 $routes->scope('/', function (RouteBuilder $builder) {
@@ -80,11 +83,18 @@ $routes->scope('/', function (RouteBuilder $builder) {
  * ```
  * $routes->scope('/api', function (RouteBuilder $builder) {
  *     // No $builder->applyMiddleware() here.
- *     
+ *
  *     // Parse specified extensions from URLs
  *     // $builder->setExtensions(['json', 'xml']);
- *     
+ *
  *     // Connect API actions here.
  * });
  * ```
  */
+Router::prefix('Admin', function ($routes) {
+    // ここのすべてのルートには、 `/admin` というプレフィックスが付きます。
+    // また、 `'prefix' => 'Admin'` ルート要素が追加されます。
+    // これは、これらのルートのURLを生成するときに必要になります
+    $routes->fallbacks(DashedRoute::class);
+    $routes->connect('/', ['controller' => 'Admins', 'action' => 'index']);
+});
