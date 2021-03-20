@@ -4,5 +4,6 @@
     </div>
     <div class="top-nav-links">
         <?= $this->Html->link('マイページ', ['controller' => 'Users', 'action' => 'index']); ?>
+        <?= $this->Html->link('ポートフォリオ', ['controller' => 'Portfolios', 'action' => 'index']); ?>
     </div>
 </nav>
