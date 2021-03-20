@@ -1,23 +1,15 @@
+import { BaseTextareaForm } from '../Atoms/base_textarea_form.js';
+
 export const ContentArea = {
-    data: function () {
-        return {
-            blocks: [
-                { id: 1 },
-                { id: 2 },
-            ],
-        }
-    },
-    methods: {
-        addTextareaBlock: function (event) {
-            console.log('click');
-            this.blocks.push({id: 3});
-        }
-    },
+    props: ['blocks'],
     template: `
-    <div v-on:add-textarea-block="addTextareaBlock">
-        <div v-for="block in blocks" :key="block.id">
-            {{ block.id }}
+    <div>
+        <div v-for="block in blocks.blockLayout" :key="block.id">
+            <base_textarea_form v-if="block.type == 'textarea'" v-bind:blockId="block.id"></base_textarea_form>
         </div>
     </div>
     `,
+    components: {
+        'base_textarea_form': BaseTextareaForm,
+    }
 };

@@ -5,7 +5,7 @@ export const BlockArea = {
         <div class="block-area column-40 content">
             <lagend>ブロック</lagend>
             <ul id="blocks">
-                <add-textarea-block-button></add-textarea-block-button>
+                <add-textarea-block-button v-on:add-textarea-block="$emit('add-textarea-block')"></add-textarea-block-button>
             </ul>
         </div>
     `,
