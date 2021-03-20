@@ -23,7 +23,7 @@
     <?= $this->Html->charset(); ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
-        才雲
+        管理画面
     </title>
     <?= $this->Html->meta('icon'); ?>
 
@@ -36,7 +36,7 @@
     <?= $this->fetch('script'); ?>
 </head>
 <body>
-    <?= $this->element('header'); ?>
+    <?= $this->element('Admin/header'); ?>
     <main class="main">
         <div class="container">
             <?= $this->Flash->render(); ?>
