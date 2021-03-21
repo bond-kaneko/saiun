@@ -26,7 +26,7 @@ class InstructorsController extends AppController
         if ($result->isValid()) {
             $redirect = $this->request->getQuery('redirect', [
                 'prefix' => 'Instructor',
-                'controller' => 'InstructorsUsers',
+                'controller' => 'Instructors',
                 'action' => 'index',
             ]);
 

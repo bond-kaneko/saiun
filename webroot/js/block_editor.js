@@ -2,6 +2,7 @@ import { FormArea } from './Components/Organisms/form_area.js';
 import { BlockArea } from './Components/Organisms/block_area.js';
 
 const BlockEditor = {
+    props: ['csrfToken'],
     data: function () {
         return {
             blocks: {
@@ -36,7 +37,7 @@ const BlockEditor = {
     },
     template: `
         <div id="editor">
-            <form-area :blocks="blocks"></form-area>
+            <form-area :blocks="blocks" :csrf-token="csrfToken"></form-area>
             <block-area v-on:add-textarea-block="AddTextareaBlock"></block-area>
         </div>
     `,

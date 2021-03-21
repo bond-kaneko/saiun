@@ -20,7 +20,9 @@
 </style>
 
 <div id="block-editor">
-    <block-editor></block-editor>
+    <block-editor csrf-token="<?= $this->request->getAttribute('csrfToken'); ?>"></block-editor>
 </div>
+
+<!-- <input type="hidden" name="_csrfToken" autocomplete="off" value="<?= $this->request->getAttribute('csrfToken'); ?>"> -->
 
 <?= $this->Html->script('block_editor', ['type' => 'module']); ?>
