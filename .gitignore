@@ -6,7 +6,7 @@
 /tmp/*
 /vendor/*
 !/vendor/laravel/
-/config/Migrations/schma-dump-default.lock
+config/Migrations/schema-dump-default.lock
 
 # OS generated files #
 ######################
@@ -46,3 +46,4 @@ nbproject/*
 
 #vagrant
 .vagrant
+

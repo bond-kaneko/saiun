@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Model\Entity;
@@ -6,15 +7,14 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Portfolio Entity
+ * Portfolio Entity.
  *
- * @property int $id
- * @property int $user_id
- * @property string $title
- * @property array $content
- * @property \Cake\I18n\FrozenTime $created
- * @property \Cake\I18n\FrozenTime $modified
- *
+ * @property int                    $id
+ * @property int                    $user_id
+ * @property string                 $title
+ * @property array                  $content
+ * @property \Cake\I18n\FrozenTime  $created
+ * @property \Cake\I18n\FrozenTime  $modified
  * @property \App\Model\Entity\User $user
  */
 class Portfolio extends Entity
@@ -29,11 +29,11 @@ class Portfolio extends Entity
      * @var array
      */
     protected $_accessible = [
-        'user_id' => true,
+        'instructor_id' => true,
         'title' => true,
         'content' => true,
         'created' => true,
         'modified' => true,
-        'user' => true,
+        'instructor' => true,
     ];
 }

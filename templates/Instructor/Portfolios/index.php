@@ -6,6 +6,7 @@
 ?>
 <div class="portfolios index content">
     <h3><?= __('Portfolios'); ?></h3>
+    <?= $this->Html->link('追加', ['action' => 'add'], ['class' => 'button float-right']); ?>
     <div class="table-responsive">
         <table>
             <thead>
