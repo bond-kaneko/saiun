@@ -179,6 +179,33 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
             ]);
 
             return $authenticationService;
+        // 講師画面
+        } elseif (strpos($path, '/instructor') === 0) {
+            $authenticationService->setConfig([
+                'unauthenticatedRedirect' => Router::url(['prefix' => 'Instructor', 'controller' => 'Instructors', 'action' => 'login']),
+                'queryParam' => 'redirect',
+            ]);
+
+            $authenticationService->loadIdentifier('Authentication.Password', [
+                'fields' => [
+                    'username' => 'email',
+                    'password' => 'password',
+                ],
+                'resolver' => [
+                    'className' => 'Authentication.Orm',
+                    'userModel' => 'Instructors',
+                ],
+            ]);
+
+            $authenticationService->loadAuthenticator('Authentication.Session', ['sessionKey' => 'InstructorAuth']);
+            $authenticationService->loadAuthenticator('Authentication.Form', [
+                'fields' => [
+                    'username' => 'email',
+                    'password' => 'password',
+                ],
+            ]);
+
+            return $authenticationService;
         }
 
         $authenticationService->setConfig([

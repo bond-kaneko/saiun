@@ -5,5 +5,6 @@
     <div class="top-nav-links">
         <?= $this->Html->link('管理ユーザー', ['controller' => 'Admins', 'action' => 'index']); ?>
         <?= $this->Html->link('一般ユーザー', ['controller' => 'Users', 'action' => 'index']); ?>
+        <?= $this->Html->link('講師ユーザー', ['controller' => 'Instructors', 'action' => 'index']); ?>
     </div>
 </nav>

@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Admin;
+namespace App\Controller;
 
 /**
- * Admins Controller.
+ * Instructors Controller.
  *
- * @property \App\Model\Table\AdminsTable $Admins
+ * @property \App\Model\Table\InstructorsTable $Instructors
  *
- * @method \App\Model\Entity\Admin[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ * @method \App\Model\Entity\Instructor[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
-class AdminsController extends AppController
+class InstructorsController extends AppController
 {
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
@@ -25,8 +25,8 @@ class AdminsController extends AppController
         $result = $this->Authentication->getResult();
         if ($result->isValid()) {
             $redirect = $this->request->getQuery('redirect', [
-                'prefix' => 'Admin',
-                'controller' => 'Admins',
+                'prefix' => 'Instructor',
+                'controller' => 'InstructorsUsers',
                 'action' => 'index',
             ]);
 
@@ -40,11 +40,10 @@ class AdminsController extends AppController
     public function logout()
     {
         $result = $this->Authentication->getResult();
-        // POSTやGETに関係なく、ユーザーがログインしていればリダイレクトします
         if ($result->isValid()) {
             $this->Authentication->logout();
 
-            return $this->redirect(['controller' => 'Admins', 'action' => 'login']);
+            return $this->redirect(['controller' => 'Instructors', 'action' => 'login']);
         }
     }
 
@@ -55,15 +54,15 @@ class AdminsController extends AppController
      */
     public function index()
     {
-        $admins = $this->paginate($this->Admins);
+        $instructors = $this->paginate($this->Instructors);
 
-        $this->set(compact('admins'));
+        $this->set(compact('instructors'));
     }
 
     /**
      * View method.
      *
-     * @param string|null $id admin id
+     * @param string|null $id instructor id
      *
      * @return \Cake\Http\Response|void|null Renders view
      *
@@ -71,11 +70,11 @@ class AdminsController extends AppController
      */
     public function view($id = null)
     {
-        $admin = $this->Admins->get($id, [
-            'contain' => [],
+        $instructor = $this->Instructors->get($id, [
+            'contain' => ['Portfolios'],
         ]);
 
-        $this->set(compact('admin'));
+        $this->set(compact('instructor'));
     }
 
     /**
@@ -85,23 +84,23 @@ class AdminsController extends AppController
      */
     public function add()
     {
-        $admin = $this->Admins->newEmptyEntity();
+        $instructor = $this->Instructors->newEmptyEntity();
         if ($this->request->is('post')) {
-            $admin = $this->Admins->patchEntity($admin, $this->request->getData());
-            if ($this->Admins->save($admin)) {
-                $this->Flash->success(__('The admin has been saved.'));
+            $instructor = $this->Instructors->patchEntity($instructor, $this->request->getData());
+            if ($this->Instructors->save($instructor)) {
+                $this->Flash->success(__('The instructor has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The admin could not be saved. Please, try again.'));
+            $this->Flash->error(__('The instructor could not be saved. Please, try again.'));
         }
-        $this->set(compact('admin'));
+        $this->set(compact('instructor'));
     }
 
     /**
      * Edit method.
      *
-     * @param string|null $id admin id
+     * @param string|null $id instructor id
      *
      * @return \Cake\Http\Response|void|null redirects on successful edit, renders view otherwise
      *
@@ -109,25 +108,25 @@ class AdminsController extends AppController
      */
     public function edit($id = null)
     {
-        $admin = $this->Admins->get($id, [
+        $instructor = $this->Instructors->get($id, [
             'contain' => [],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $admin = $this->Admins->patchEntity($admin, $this->request->getData());
-            if ($this->Admins->save($admin)) {
-                $this->Flash->success(__('The admin has been saved.'));
+            $instructor = $this->Instructors->patchEntity($instructor, $this->request->getData());
+            if ($this->Instructors->save($instructor)) {
+                $this->Flash->success(__('The instructor has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The admin could not be saved. Please, try again.'));
+            $this->Flash->error(__('The instructor could not be saved. Please, try again.'));
         }
-        $this->set(compact('admin'));
+        $this->set(compact('instructor'));
     }
 
     /**
      * Delete method.
      *
-     * @param string|null $id admin id
+     * @param string|null $id instructor id
      *
      * @return \Cake\Http\Response|void|null redirects to index
      *
@@ -136,11 +135,11 @@ class AdminsController extends AppController
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $admin = $this->Admins->get($id);
-        if ($this->Admins->delete($admin)) {
-            $this->Flash->success(__('The admin has been deleted.'));
+        $instructor = $this->Instructors->get($id);
+        if ($this->Instructors->delete($instructor)) {
+            $this->Flash->success(__('The instructor has been deleted.'));
         } else {
-            $this->Flash->error(__('The admin could not be deleted. Please, try again.'));
+            $this->Flash->error(__('The instructor could not be deleted. Please, try again.'));
         }
 
         return $this->redirect(['action' => 'index']);

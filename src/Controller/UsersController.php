@@ -16,8 +16,6 @@ class UsersController extends AppController
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
         parent::beforeFilter($event);
-        // ログインアクションを認証を必要としないように設定することで、
-        // 無限リダイレクトループの問題を防ぐことができます
         $this->Authentication->addUnauthenticatedActions(['login']);
     }
 
@@ -25,18 +23,15 @@ class UsersController extends AppController
     {
         $this->request->allowMethod(['get', 'post']);
         $result = $this->Authentication->getResult();
-        // POSTやGETに関係なく、ユーザーがログインしていればリダイレクトします
         if ($result->isValid()) {
-            // ログイン成功後に /article にリダイレクトします
             $redirect = $this->request->getQuery('redirect', [
-                'prefix' => 'Admin',
-                'controller' => 'AdminUsers',
+                'controller' => 'Users',
                 'action' => 'index',
             ]);
 
             return $this->redirect($redirect);
         }
-        // ユーザーの送信と認証に失敗した場合にエラーを表示します
+
         if ($this->request->is('post') && !$result->isValid()) {
             $this->Flash->error(__('Invalid email or password'));
         }
@@ -45,11 +40,10 @@ class UsersController extends AppController
     public function logout()
     {
         $result = $this->Authentication->getResult();
-        // POSTやGETに関係なく、ユーザーがログインしていればリダイレクトします
         if ($result->isValid()) {
             $this->Authentication->logout();
 
-            return $this->redirect(['controller' => 'AdminUsers', 'action' => 'login']);
+            return $this->redirect(['controller' => 'Users', 'action' => 'login']);
         }
     }
 

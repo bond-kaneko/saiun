@@ -92,9 +92,10 @@ $routes->scope('/', function (RouteBuilder $builder) {
  * ```
  */
 Router::prefix('Admin', function ($routes) {
-    // ここのすべてのルートには、 `/admin` というプレフィックスが付きます。
-    // また、 `'prefix' => 'Admin'` ルート要素が追加されます。
-    // これは、これらのルートのURLを生成するときに必要になります
-    $routes->fallbacks(DashedRoute::class);
     $routes->connect('/', ['controller' => 'Admins', 'action' => 'index']);
+    $routes->fallbacks(DashedRoute::class);
+});
+Router::prefix('Instructor', function ($routes) {
+    $routes->connect('/', ['controller' => 'Instructors', 'action' => 'index']);
+    $routes->fallbacks(DashedRoute::class);
 });

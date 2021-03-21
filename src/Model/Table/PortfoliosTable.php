@@ -1,41 +1,40 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Model\Table;
 
-use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * Portfolios Model
+ * Portfolios Model.
  *
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
  *
- * @method \App\Model\Entity\Portfolio newEmptyEntity()
- * @method \App\Model\Entity\Portfolio newEntity(array $data, array $options = [])
- * @method \App\Model\Entity\Portfolio[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\Portfolio get($primaryKey, $options = [])
- * @method \App\Model\Entity\Portfolio findOrCreate($search, ?callable $callback = null, $options = [])
- * @method \App\Model\Entity\Portfolio patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\Portfolio[] patchEntities(iterable $entities, array $data, array $options = [])
- * @method \App\Model\Entity\Portfolio|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Portfolio saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Portfolio                                             newEmptyEntity()
+ * @method \App\Model\Entity\Portfolio                                             newEntity(array $data, array $options = [])
+ * @method \App\Model\Entity\Portfolio[]                                           newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\Portfolio                                             get($primaryKey, $options = [])
+ * @method \App\Model\Entity\Portfolio                                             findOrCreate($search, ?callable $callback = null, $options = [])
+ * @method \App\Model\Entity\Portfolio                                             patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\Portfolio[]                                           patchEntities(iterable $entities, array $data, array $options = [])
+ * @method \App\Model\Entity\Portfolio|false                                       save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Portfolio                                             saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \App\Model\Entity\Portfolio[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
- * @method \App\Model\Entity\Portfolio[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Portfolio[]|\Cake\Datasource\ResultSetInterface       saveManyOrFail(iterable $entities, $options = [])
  * @method \App\Model\Entity\Portfolio[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
- * @method \App\Model\Entity\Portfolio[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Portfolio[]|\Cake\Datasource\ResultSetInterface       deleteManyOrFail(iterable $entities, $options = [])
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
 class PortfoliosTable extends Table
 {
     /**
-     * Initialize method
+     * Initialize method.
      *
-     * @param array $config The configuration for the Table.
-     * @return void
+     * @param array $config the configuration for the Table
      */
     public function initialize(array $config): void
     {
@@ -47,8 +46,8 @@ class PortfoliosTable extends Table
 
         $this->addBehavior('Timestamp');
 
-        $this->belongsTo('Users', [
-            'foreignKey' => 'user_id',
+        $this->belongsTo('Instructors', [
+            'foreignKey' => 'instructor_id',
             'joinType' => 'INNER',
         ]);
     }
@@ -56,8 +55,7 @@ class PortfoliosTable extends Table
     /**
      * Default validation rules.
      *
-     * @param \Cake\Validation\Validator $validator Validator instance.
-     * @return \Cake\Validation\Validator
+     * @param \Cake\Validation\Validator $validator validator instance
      */
     public function validationDefault(Validator $validator): Validator
     {
@@ -82,12 +80,11 @@ class PortfoliosTable extends Table
      * Returns a rules checker object that will be used for validating
      * application integrity.
      *
-     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
-     * @return \Cake\ORM\RulesChecker
+     * @param \Cake\ORM\RulesChecker $rules the rules object to be modified
      */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
-        $rules->add($rules->existsIn(['user_id'], 'Users'), ['errorField' => 'user_id']);
+        $rules->add($rules->existsIn(['instructor_id'], 'Instructors'), ['errorField' => 'instructor_id']);
 
         return $rules;
     }
