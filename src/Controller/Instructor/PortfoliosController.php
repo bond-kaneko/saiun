@@ -72,6 +72,18 @@ class PortfoliosController extends AppController
         if ($this->request->is('post')) {
             $requestData = $this->request->getData();
 
+            for ($i = 0; $i < count($requestData['portfolio_contents']); ++$i) {
+                if ($requestData['portfolio_contents'][$i]['image']->getError() !== 4) {
+                    $image = $requestData['portfolio_contents'][$i]['image'];
+
+                    $fileName = 'uploads/'.date('YmdHis').$image->getClientFilename();
+                    $filePath = './img/'.$fileName;
+                    $image->moveTo($filePath);
+
+                    $requestData['portfolio_contents'][$i]['image_url'] = $fileName;
+                }
+            }
+
             $portfolio = $this->Portfolios->patchEntity($portfolio, $requestData);
             if ($this->Portfolios->save($portfolio)) {
                 $this->Flash->success(__('The portfolio has been saved.'));

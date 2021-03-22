@@ -34,6 +34,7 @@ class Portfolio extends Entity
         'created' => true,
         'modified' => true,
         'instructor' => true,
+        'image_ufl' => true,
         'portfolio_contents' => true,
     ];
 }

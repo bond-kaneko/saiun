@@ -28,6 +28,7 @@
             <table>
                 <?php foreach ($portfolio->portfolio_contents as $content): ?>
                     <tr>
+                        <?= $this->Html->image($content->image_url); ?>
                         <?= h($content->content); ?>
                     </tr>
                 <?php endforeach; ?>
