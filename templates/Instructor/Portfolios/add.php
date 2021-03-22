@@ -1,28 +1,16 @@
-<style>
-.container {
-    max-width: 90%;
-}
+<div class="row">
+    <div class="column-responsive column-80">
+        <div class="portfolios form content">
+            <?= $this->Form->create($portfolio); ?>
+            <fieldset>
+                <legend>ポートフォリオ追加</legend>
+                <?= $this->Form->control('title'); ?>
 
-#block-editor #editor {
-    width: 100%;
-    display: flex;
-}
-#block-editor #editor .form-area {
-    width: 45%;
-    margin-right: auto;
-    margin-left: auto;
-}
-#block-editor #editor .block-area {
-    width: 45%;
-    margin-right: auto;
-    margin-left: auto;
-}
-</style>
-
-<div id="block-editor">
-    <block-editor csrf-token="<?= $this->request->getAttribute('csrfToken'); ?>"></block-editor>
+                <label>コンテンツ</label>
+                <?= $this->Form->control('portfolio_contents[0][content]', ['type' => 'textarea', 'label' => false]); ?>
+            </fieldset>
+            <?= $this->Form->button(__('Submit')); ?>
+            <?= $this->Form->end(); ?>
+        </div>
+    </div>
 </div>
-
-<!-- <input type="hidden" name="_csrfToken" autocomplete="off" value="<?= $this->request->getAttribute('csrfToken'); ?>"> -->
-
-<?= $this->Html->script('block_editor', ['type' => 'module']); ?>

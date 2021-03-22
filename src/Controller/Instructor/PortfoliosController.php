@@ -50,12 +50,10 @@ class PortfoliosController extends AppController
     public function view($id = null)
     {
         $portfolio = $this->Portfolios->get($id, [
-            'contain' => ['Instructors'],
+            'contain' => ['Instructors', 'PortfolioContents'],
         ]);
 
-        $blocks = (array) json_decode($portfolio->content);
-
-        $this->set(compact('portfolio', 'blocks'));
+        $this->set(compact('portfolio'));
     }
 
     /**
@@ -72,9 +70,9 @@ class PortfoliosController extends AppController
 
         $portfolio = $this->Portfolios->newEntity(['instructor_id' => $loginId]);
         if ($this->request->is('post')) {
-            debug($this->request->getData());
-            exit;
-            $portfolio = $this->Portfolios->patchEntity($portfolio, $this->request->getData());
+            $requestData = $this->request->getData();
+
+            $portfolio = $this->Portfolios->patchEntity($portfolio, $requestData);
             if ($this->Portfolios->save($portfolio)) {
                 $this->Flash->success(__('The portfolio has been saved.'));
 
