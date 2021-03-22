@@ -47,3 +47,4 @@ nbproject/*
 #vagrant
 .vagrant
 
+/webroot/img/uploads/*
