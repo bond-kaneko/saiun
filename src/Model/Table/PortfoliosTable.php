@@ -46,6 +46,11 @@ class PortfoliosTable extends Table
 
         $this->addBehavior('Timestamp');
 
+        $this->hasMany('PortfolioContents', [
+            'foreignKey' => 'portfolio_id',
+            'joinType' => 'INNER',
+        ]);
+
         $this->belongsTo('Instructors', [
             'foreignKey' => 'instructor_id',
             'joinType' => 'INNER',
@@ -68,10 +73,6 @@ class PortfoliosTable extends Table
             ->maxLength('title', 255)
             ->requirePresence('title', 'create')
             ->notEmptyString('title');
-
-        $validator
-            ->requirePresence('content', 'create')
-            ->notEmptyString('content');
 
         return $validator;
     }
